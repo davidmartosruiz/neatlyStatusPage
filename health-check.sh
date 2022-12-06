@@ -45,6 +45,7 @@ do
     fi
     sleep 5
   done
+  echo "$url $response $result"
   dateTime=$(date +'%Y-%m-%d %H:%M')
   if [[ $commit == true ]]
   then
