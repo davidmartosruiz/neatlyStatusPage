@@ -118,7 +118,7 @@ function getStatusText(color) {
     : "Unknown";
 }
 
-function getStatusDescriptiveText(color) {
+	function getStatusDescriptiveText(color) {
   return color == "nodata"
     ? "No hay datos disponibles: no se realizó la comprobación de estado."
     : color == "success"
@@ -182,8 +182,9 @@ function splitRowsByDate(rows) {
       continue;
     }
 
-    const [dateTimeStr, resultStr] = row.split(",", 2);
-    const dateTime = new Date(Date.parse(dateTimeStr.replace(/-/g, "/") + " GMT"));
+    const [dateTimeStr, resultStr] = row.split(',', 2);
+    // Replace '-' with '/' because Safari
+    const dateTime = new Date(Date.parse(dateTimeStr.replaceAll('-', '/') + ' GMT'));
     const dateStr = dateTime.toDateString();
 
     let resultArray = dateValues[dateStr];
@@ -249,4 +250,25 @@ async function genAllReports() {
 
     await genReportLog(document.getElementById("reports"), key, url);
   }
+}
+
+async function genIncidentReport() {
+  const response = await fetch("https://status.neatly.es/incident_report.md");
+  if (response.ok) {
+    const json = await response.json();
+    try {
+      const activeDom = DOMPurify.sanitize(marked.parse(json.active ? json.active : 'Sin incidentes activos'));
+      const inactiveDom = DOMPurify.sanitize(marked.parse(json.inactive));
+      document.getElementById('activeIncidentReports').innerHTML = activeDom;
+      document.getElementById('pastIncidentReports').innerHTML = inactiveDom;
+
+      if (json.active) {
+        setTimeout(() => {
+          document.getElementById('incidents').scrollIntoView(true);
+        }, 1000);
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  } 
 }
