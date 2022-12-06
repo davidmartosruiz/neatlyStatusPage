@@ -3,7 +3,7 @@ name: Scheduled Health Check
 # Controls when the action will run.
 on:
   schedule:
-    - cron: "30 * * * *"
+    - cron: "0,15,30,45 * * * *"
 
 jobs:
   health_check_job:
@@ -11,6 +11,8 @@ jobs:
     name: Check all sites
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run Shell Script
         id: shell_script_run
         run: bash ./health-check.sh
