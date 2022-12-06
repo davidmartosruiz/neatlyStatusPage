@@ -40,7 +40,6 @@ do
     else
       result="failed"
     fi
-    echo "$result $response $url"
     if [ "$result" = "success" ]; then
       break
     fi
