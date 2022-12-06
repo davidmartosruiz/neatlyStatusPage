@@ -110,7 +110,7 @@ function getStatusText(color) {
   return color == "nodata"
     ? "Información no disponible"
     : color == "success"
-    ? "Completamente operativo"
+    ? "Operativo"
     : color == "failure"
     ? "Interrupción total"
     : color == "partial"
