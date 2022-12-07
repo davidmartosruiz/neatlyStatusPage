@@ -115,7 +115,7 @@ function getStatusText(color) {
     ? "Interrupción total"
     : color == "partial"
     ? "Interrupción parcial"
-    : "Unknown";
+    : "Desconocido";
 }
 
 	function getStatusDescriptiveText(color) {
@@ -127,7 +127,7 @@ function getStatusText(color) {
     ? "Interrupciones totales registradas en este día."
     : color == "partial"
     ? "Interrupciones parciales registradas en este día."
-    : "Unknown";
+    : "Desconocido";
 }
 
 function getTooltip(key, date, quartile, color) {
@@ -216,7 +216,13 @@ function showTooltip(element, key, date, color) {
   clearTimeout(tooltipTimeout);
   const toolTipDiv = document.getElementById("tooltip");
 
-  document.getElementById("tooltipDateTime").innerText = date.toDateString();
+  const dateOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    weekday: "short",
+  };
+  document.getElementById("tooltipDateTime").innerText = date.toLocaleDateString("es-ES",dateOptions);
   document.getElementById("tooltipDescription").innerText =
     getStatusDescriptiveText(color);
 
