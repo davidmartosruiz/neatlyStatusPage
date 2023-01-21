@@ -22,8 +22,10 @@ function constructStatusStream(key, url, uptimeData) {
   const lastSet = uptimeData[0];
   const color = getColor(lastSet);
 
+  let keyParts = key.split("/");
+  let esKey = keyParts[0];
 	
-  keySpaces = key.replaceAll('_', ' ');
+  keySpaces = esKey.replaceAll('_', ' ');
 	
   const container = templatize("statusContainerTemplate", {
     title: keySpaces,
