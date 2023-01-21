@@ -1,0 +1,83 @@
+<html lang="en">
+  <head>
+    <title>Neatly Status</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" property="description" content="Check the status of Neatly Servers." />
+    <link rel="stylesheet" href="../index.css" />
+    <script src="index.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/dompurify@2.3.5/dist/purify.min.js"></script>
+  </head>
+  <body>
+    <div class="pageContainer">
+      <div class="headline">
+        <img src="../logo.png" alt="Logo" width="200px" />
+        <br> <br>
+        <span> Status of our services </span>
+      </div>
+      <div id="reports" class="reportContainer"></div>
+      <div id="incidents" class="incidentsContainer">
+        <div class="statusContainer">
+          <div class="statusHeader">
+            <h3 class="incidentReportsHeader">Incident Report</h3>
+          </div>
+          <h4>Active incidents</h4>
+          <div id="activeIncidentReports">
+             <h5>EU-SOUTH-1 DNS servers</h5>
+             <p>Due to a change in Neatly's DNS servers, the admin panel, email service, FTP service and DNS service may be affected.</p>
+             <p>If you see this issue, check your domain's DNS server settings or contact Neatly Support.</p>
+             <!--<p>No reported issues, thanks for trusting Neatly.</p>-->
+          </div>
+          <hr />
+          <h4>Previous incidents</h4>
+          <div id="pastIncidentReports">
+             <h5>Billing Dashboard</h5>
+             <p>Due to ongoing bureaucratic procedures, the billing platform is in test mode, so it does not support payments.</p>
+             <p>If you are interested in any of our products, please contact Neatly Support. We are working to resolve this issue as soon as possible.</p>
+          </div>
+        </div>
+      </div>
+      <div id="tooltip" class="tooltip" style="opacity: 0">
+        <div id="tooltipArrow" class="tooltipArrow"></div>
+        <div id="tooltipDateTime" class="tooltipDateTime"></div>
+        <div id="tooltipStatus" class="tooltipStatus"></div>
+        <hr />
+        <div id="tooltipDescription" class="tooltipDescription"></div>
+      </div>
+      <div id="templates" style="display: none">
+        <div
+          id="statusSquareTemplate"
+          class="statusSquare $color"
+          data-status="$color"
+        ></div>
+        <div id="statusLineTemplate" class="statusLine"></div>
+        <div
+          id="statusStreamContainerTemplate"
+          class="statusStreamContainer"
+        ></div>
+        <div id="statusContainerTemplate" class="statusContainer">
+          <div class="statusHeader">
+            <h6 class="statusTitle">$title&nbsp;</h6>
+            <div class="$color statusHeadline">$status</div>
+          </div>
+          <div class="statusSubtitle">
+            <div class="sectionUrl"><a href="$url">$url</a></div>
+            <div class="statusUptime">$upTime in the last 30 days</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      Powered by
+      <a href="https://neatly.es"
+        >Neatly</a
+      >
+    </footer>
+  </body>
+  <script>
+    genAllReports();
+    window.addEventListener('load', () => {
+      genIncidentReport();
+    });
+  </script>
+</html>
