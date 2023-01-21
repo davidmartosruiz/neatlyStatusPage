@@ -219,13 +219,8 @@ function showTooltip(element, key, date, color) {
   clearTimeout(tooltipTimeout);
   const toolTipDiv = document.getElementById("tooltip");
 
-  const dateOptions = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    weekday: "short",
-  };
-  document.getElementById("tooltipDateTime").innerText = date.toLocaleDateString("es-ES",dateOptions);
+
+  document.getElementById("tooltipDateTime").innerText = date.toDateString();
   document.getElementById("tooltipDescription").innerText =
     getStatusDescriptiveText(color);
 
