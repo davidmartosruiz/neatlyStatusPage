@@ -22,7 +22,7 @@ function constructStatusStream(key, url, uptimeData) {
   const lastSet = uptimeData[0];
   const color = getColor(lastSet);
 
-  let keyParts = key.split("/");
+  let keyParts = key.split(":");
   let esKey = keyParts[0];
 	
   keySpaces = esKey.replaceAll('_', ' ');
